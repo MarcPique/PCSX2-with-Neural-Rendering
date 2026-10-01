@@ -97,6 +97,11 @@ AutoUpdaterDialog::~AutoUpdaterDialog() = default;
 
 bool AutoUpdaterDialog::isSupported()
 {
+#ifdef _WIN32
+	// This fork ships its own Windows packages. An official update would
+	// replace the executable and remove the native neural controls.
+	return false;
+#endif
 	// Logic to detect whether we can use the auto updater.
 	// We use tagged commit, because this gets set on nightly builds.
 	if (!BuildVersion::GitTaggedCommit)

@@ -8,6 +8,9 @@
 #include "LogWindow.h"
 #include "MainWindow.h"
 #include "QtHost.h"
+#ifdef _WIN32
+#include "Neural/neural_rendering_config.h"
+#endif
 #include "QtProgressCallback.h"
 #include "QtUtils.h"
 #include "SetupWizardDialog.h"
@@ -1536,7 +1539,11 @@ bool Host::RequestResetSettings(bool folders, bool core, bool controllers, bool 
 
 QString QtHost::GetAppNameAndVersion()
 {
+#ifdef _WIN32
+	return QString("PCSX2 Neural 0.1.0 | %1").arg(BuildVersion::GitRev);
+#else
 	return QString("PCSX2 %1").arg(BuildVersion::GitRev);
+#endif
 }
 
 QString QtHost::GetAppConfigSuffix()
@@ -2496,6 +2503,10 @@ int main(int argc, char* argv[])
 	// Bail out if we can't find any config.
 	if (!QtHost::InitializeConfig())
 		return EXIT_FAILURE;
+
+	#ifdef _WIN32
+	neural_rendering::initialize();
+	#endif
 
 	// Are we just setting up the configuration?
 	if (s_test_config_and_exit)

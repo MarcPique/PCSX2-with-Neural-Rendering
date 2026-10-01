@@ -241,7 +241,8 @@ static void CloseGSRenderer()
 }
 
 bool GSreopen(bool recreate_device, bool recreate_renderer, GSRendererType new_renderer,
-	std::optional<const Pcsx2Config::GSOptions*> old_config)
+	std::optional<const Pcsx2Config::GSOptions*> old_config,
+	const std::function<void()>& device_closed, const std::function<void()>& reopen_failed)
 {
 	Console.WriteLn("Reopening GS with %s device", recreate_device ? "new" : "existing");
 
@@ -295,10 +296,14 @@ bool GSreopen(bool recreate_device, bool recreate_renderer, GSRendererType new_r
 	if (recreate_device)
 	{
 		// We need a new render window when changing APIs.
-		const bool recreate_window = (g_gs_device->GetRenderAPI() != GetAPIForRenderer(GSConfig.Renderer));
+		const bool recreate_window = (g_gs_device->GetRenderAPI() != GetAPIForRenderer(new_renderer));
 		const GSVSyncMode vsync_mode = g_gs_device->GetVSyncMode();
 		const bool allow_present_throttle = g_gs_device->IsPresentThrottleAllowed();
 		CloseGSDevice(false);
+
+		// Optional frontend transaction: old Vulkan layers must be gone before changing their files/environment.
+		if (device_closed)
+			device_closed();
 
 		if (!OpenGSDevice(new_renderer, false, recreate_window, vsync_mode, allow_present_throttle))
 		{
@@ -307,6 +312,9 @@ bool GSreopen(bool recreate_device, bool recreate_renderer, GSRendererType new_r
 				Host::OSD_CRITICAL_ERROR_DURATION);
 
 			CloseGSDevice(false);
+
+			if (reopen_failed)
+				reopen_failed();
 
 			if (old_config.has_value())
 				GSConfig = *old_config.value();

@@ -1,3 +1,13 @@
+# PCSX2 Neural — fork experimental para Windows
+
+Controles nativos de Neural / ReShade, 14 sliders, cuatro presets y activación/desactivación sin reiniciar PCSX2. Menú ReShade bloqueado dentro del juego.
+
+**[Descargar release](https://github.com/MarcPique/PCSX2-with-Neural-Rendering/releases)** · **[Guía y requisitos](NEURAL_RENDERING.md)** · **[Pruebas y límites](docs/neural-rendering/VALIDACION.md)**
+
+Proyecto independiente, desarrollado con asistencia de IA. No es una release oficial de PCSX2 ni de NVIDIA. La integración neural requiere Vulkan y hardware compatible; el usuario debe comprobar sus juegos.
+
+---
+
 # PCSX2
 
 ![Windows Build Status](https://img.shields.io/github/actions/workflow/status/PCSX2/pcsx2/windows_build_matrix.yml?label=%F0%9F%96%A5%EF%B8%8F%20Windows%20Builds)

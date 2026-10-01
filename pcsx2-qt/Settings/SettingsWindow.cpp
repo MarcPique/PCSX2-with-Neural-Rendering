@@ -23,6 +23,9 @@
 #include "Settings/MemoryCardSettingsWidget.h"
 #include "Settings/DebugSettingsWidget.h"
 #include "SettingsWindow.h"
+#ifdef _WIN32
+#include "Settings/NeuralRenderingSettingsWidget.h"
+#endif
 
 #include "pcsx2/Achievements.h"
 #include "pcsx2/GameList.h"
@@ -158,6 +161,15 @@ void SettingsWindow::setupUi(const GameList::Entry* game)
 	addWidget(m_graphics_settings = new GraphicsSettingsWidget(this, m_ui.settingsContainer), tr("Graphics"), QStringLiteral("image-fill"),
 		tr("<strong>Graphics Settings</strong><hr>These options determine the configuration of the graphical output.<br><br>Mouse over an "
 		   "option for additional information, and Shift+Wheel to scroll this panel."));
+#ifdef _WIN32
+	if (!isPerGameSettings())
+	{
+		addWidget(new NeuralRenderingSettingsWidget([this]() {
+			setIntSettingValue("EmuCore/GS", "Renderer", static_cast<int>(GSRendererType::VK));
+		}, m_ui.settingsContainer), tr("Neural / ReShade"),
+			QStringLiteral("image-fill"), tr("<strong>Neural / ReShade</strong><hr>Controles globales de esta copia portable. Aplicar conserva la partida y recrea el motor gráfico sin reiniciar PCSX2."));
+	}
+#endif
 	addWidget(m_osd_settings = new OSDSettingsWidget(this, m_ui.settingsContainer), tr("On-Screen Display"),
 		QStringLiteral("heart-circle-line"),
 		tr("<strong>On-Screen Display Settings</strong><hr>These options control the on-screen display (OSD) overlays shown during gameplay.<br><br>Mouse over an option for additional information, and Shift+Wheel to scroll this panel."));

@@ -362,3 +362,10 @@ endif()
 
 fixup_file_properties(pcsx2-qt)
 setup_main_executable(pcsx2-qt)
+
+if(WIN32)
+    target_sources(pcsx2-qt PRIVATE
+        Neural/neural_rendering_config.cpp Neural/neural_rendering_config.h
+        Neural/NeuralRenderingController.cpp Neural/NeuralRenderingController.h
+        Settings/NeuralRenderingSettingsWidget.cpp Settings/NeuralRenderingSettingsWidget.h)
+endif()
