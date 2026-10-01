@@ -209,6 +209,15 @@ QWidget* MainWindow::getContentParent()
 
 void MainWindow::setupAdditionalUi()
 {
+#ifdef _WIN32
+	// The global Neural page is also reachable directly from the top Settings
+	// menu and from the toolbar's settings menu during a running game.
+	QAction* neural_settings_action = new QAction(tr("Neural / ReShade"), m_ui.menuSettings);
+	neural_settings_action->setObjectName(QStringLiteral("actionNeuralReshadeSettings"));
+	neural_settings_action->setIcon(QIcon::fromTheme(QStringLiteral("image-fill")));
+	m_ui.menuSettings->insertAction(m_ui.actionOSDSettings, neural_settings_action);
+	connect(neural_settings_action, &QAction::triggered, this, [this]() { doSettings("Neural / ReShade"); });
+#endif
 	makeIconsMasks(menuBar());
 	updateAdvancedSettingsVisibility();
 	setupStatusBarWidgets();
@@ -225,6 +234,9 @@ void MainWindow::setupAdditionalUi()
 
 	m_settings_toolbar_menu = new QMenu(m_ui.toolBar);
 	m_settings_toolbar_menu->addAction(m_ui.actionSettings);
+#ifdef _WIN32
+	m_settings_toolbar_menu->addAction(neural_settings_action);
+#endif
 	m_settings_toolbar_menu->addAction(m_ui.actionViewGameProperties);
 
 	for (u32 scale = 0; scale <= 10; scale++)

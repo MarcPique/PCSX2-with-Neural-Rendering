@@ -1540,7 +1540,7 @@ bool Host::RequestResetSettings(bool folders, bool core, bool controllers, bool 
 QString QtHost::GetAppNameAndVersion()
 {
 #ifdef _WIN32
-	return QString("PCSX2 Neural 0.1.0 | %1").arg(BuildVersion::GitRev);
+	return QString("PCSX2 Neural 0.1.1 | %1").arg(BuildVersion::GitRev);
 #else
 	return QString("PCSX2 %1").arg(BuildVersion::GitRev);
 #endif

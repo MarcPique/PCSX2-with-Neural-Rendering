@@ -1,4 +1,4 @@
-# PCSX2 Neural 0.1.0 — Windows x64
+# PCSX2 Neural 0.1.1 — Windows x64
 
 Fork experimental de PCSX2 v2.9.93 con Neural / ReShade en los ajustes nativos.
 Proyecto independiente: no es una versión oficial de PCSX2 ni una integración oficial de NVIDIA.
@@ -14,6 +14,8 @@ Proyecto independiente: no es una versión oficial de PCSX2 ni una integración 
 5. Elige **Equilibrado** y pulsa **Aplicar sin reiniciar**. Después puedes probar **Suave**, **Detalle** o **Cinematográfico**.
 
 Los valores numéricos se ajustan con **14 sliders y etiquetas de valor**; no hace falta escribir números. Hay controles de intensidad, tono, estructura, piel, blanco de referencia, color, transferencia, movimiento y tiempos del Feeder, además de selectores para los modos.
+
+También puedes abrir esta página directamente desde el menú superior **Ajustes → Neural / ReShade** o desde el menú desplegable del botón de ajustes de la barra de herramientas durante una partida.
 
 ## Activar y desactivar durante una partida
 

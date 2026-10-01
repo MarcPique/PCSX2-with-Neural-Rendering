@@ -65,7 +65,7 @@ Copy-Item -LiteralPath (Join-Path $repo 'COPYING.GPLv3') -Destination $package
 [IO.File]::WriteAllText((Join-Path $package 'neural-rendering.json'), '{"schema":1,"enabled":false}')
 $commit = (& git -C $repo rev-parse HEAD).Trim()
 [ordered]@{
-    release = 'v0.1.0-neural'
+    release = 'v0.1.1-neural'
     source = "https://github.com/MarcPique/PCSX2-with-Neural-Rendering/tree/$commit"
     sourceCommit = $commit
     upstreamBase = '94d86c891b1621c0b252e4fc2e155bf90274dcc0'
@@ -79,8 +79,8 @@ New-Item -ItemType Directory -Path $output -Force | Out-Null
 $sevenZip = 'C:/Program Files/7-Zip'
 Copy-Item -LiteralPath (Join-Path $sevenZip 'License.txt') -Destination (Join-Path $package 'THIRD-PARTY-NOTICES/7-Zip-LICENSE.txt')
 'Unmodified 7-Zip 26.02 self-extractor. Source: https://github.com/ip7z/7zip/tree/26.02' | Set-Content -LiteralPath (Join-Path $package 'THIRD-PARTY-NOTICES/7-Zip-SOURCE.txt')
-$zip = Join-Path $output 'PCSX2-Neural-0.1.0-win64.zip'
-$sfx = Join-Path $output 'Extraer-PCSX2-Neural-0.1.0-win64.exe'
+$zip = Join-Path $output 'PCSX2-Neural-0.1.1-win64.zip'
+$sfx = Join-Path $output 'Extraer-PCSX2-Neural-0.1.1-win64.exe'
 if ((Test-Path -LiteralPath $zip) -or (Test-Path -LiteralPath $sfx)) { throw 'Release files already exist.' }
 [IO.Compression.ZipFile]::CreateFromDirectory($package, $zip, [IO.Compression.CompressionLevel]::Optimal, $true)
 Push-Location (Split-Path $package -Parent)

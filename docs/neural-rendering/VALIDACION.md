@@ -1,4 +1,4 @@
-# Validación de PCSX2 Neural 0.1.0
+# Validación de PCSX2 Neural 0.1.1
 
 ## Alcance comprobado
 
