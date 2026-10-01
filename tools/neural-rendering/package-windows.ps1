@@ -57,7 +57,8 @@ do {
 Copy-Item -LiteralPath $NoticesDirectory -Destination (Join-Path $package 'THIRD-PARTY-NOTICES') -Recurse
 Copy-Item -LiteralPath (Join-Path $guard 'ReShade-SDK-LICENSE.md') -Destination (Join-Path $package 'THIRD-PARTY-NOTICES')
 foreach ($name in @('Setup-Neural.ps1','fetch-neural-runtime.ps1')) { Copy-Item -LiteralPath (Join-Path $PSScriptRoot $name) -Destination $package }
-Copy-Item -LiteralPath (Join-Path $repo 'NEURAL_RENDERING.md') -Destination (Join-Path $package 'LEEME.md')
+$readme = [IO.File]::ReadAllText((Join-Path $repo 'NEURAL_RENDERING.md')).Replace('(docs/neural-rendering/VALIDACION.md)', '(VALIDACION.md)')
+[IO.File]::WriteAllText((Join-Path $package 'LEEME.md'), $readme, [Text.UTF8Encoding]::new($false))
 Copy-Item -LiteralPath (Join-Path $repo 'docs/neural-rendering/VALIDACION.md') -Destination $package
 Copy-Item -LiteralPath (Join-Path $repo 'COPYING.GPLv3') -Destination $package
 [IO.File]::WriteAllText((Join-Path $package 'portable.ini'), '')

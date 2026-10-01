@@ -3,7 +3,7 @@
 Fork experimental de PCSX2 v2.9.93 con Neural / ReShade en los ajustes nativos.
 Proyecto independiente: no es una versión oficial de PCSX2 ni una integración oficial de NVIDIA.
 
-[Descargar EXE autoextraíble o ZIP](https://github.com/MarcPique/PCSX2-with-Neural-Rendering/releases/latest) · [Código fuente](https://github.com/MarcPique/PCSX2-with-Neural-Rendering) · [Validación](docs/neural-rendering/VALIDACION.md)
+[Descargar EXE autoextraíble o ZIP](https://github.com/MarcPique/PCSX2-with-Neural-Rendering/releases) · [Código fuente](https://github.com/MarcPique/PCSX2-with-Neural-Rendering) · [Validación](docs/neural-rendering/VALIDACION.md)
 
 ## Preparación rápida
 

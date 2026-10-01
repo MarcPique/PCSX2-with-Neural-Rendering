@@ -6,6 +6,7 @@
 - Pruebas de configuración: escritura atómica, conservación de claves, validación de manifiestos/rutas Unicode, rechazo de componentes incompletos y preparación repetida del entorno en el mismo proceso.
 - Prueba Qt sin ventana visible: 14 sliders, ausencia de campos numéricos editables, persistencia de valores, precisión conservada en valores no modificados y cuatro presets. Usa un controlador simulado para aislar la interfaz; no prueba el núcleo de emulación.
 - Prueba del add-on: rechaza abrir el menú por teclado, mando o API y permite cerrarlo.
+- Paquete portable: 59 binarios PE con dependencias resueltas y CRT local. Arranque `-testconfig` desde una extracción limpia del ZIP, sin rutas del entorno de desarrollo: salida 0, sin interfaz visible ni audio. El paquete público se revisa para excluir configuraciones personales y componentes neurales descargados.
 - Prueba con Vulkan real, ventana oculta y sin audio, en una NVIDIA RTX 4090: **OFF → ON → OFF → ON → OFF** en un único proceso. Se presentan fotogramas sintéticos a 624×441, se verifica la descarga del guard después de destruir Vulkan y se exige evaluación neural exitosa en ambos ciclos ON. También se verifica que se recargan intensidad 0.6/1.0 y estilo 1/2 entre ellos.
 
 El ciclo final completó los cinco pasos y terminó normalmente. Los dos ciclos ON registraron `inline feature 18 evaluation succeeded`. Esto demuestra carga, evaluación, recarga de parámetros y descarga del runtime en ese equipo; no demuestra calidad de imagen, rendimiento o compatibilidad de juegos PS2.
